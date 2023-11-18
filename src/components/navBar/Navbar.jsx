@@ -1,20 +1,18 @@
-import React, { useState } from 'react'
-import './Navbar.scss'
+import React, { useState } from "react";
+import "./Navbar.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-
 const Navbar = () => {
-
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
 
   window.onscroll = () => {
-   setIsScrolled(window.pageYOffset === 0 ? false : true);
-    return ()=>(window.onscroll=null)
-  }
+    setIsScrolled(window.pageYOffset === 0 ? false : true);
+    return () => (window.onscroll = null);
+  };
   return (
-    <div className={isScrolled ? "navbar scrolled" :"navbar"}>
+    <div className={isScrolled ? "navbar scrolled" : "navbar"}>
       <div className="container">
         <div className="left">
           <img
@@ -47,6 +45,6 @@ const Navbar = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Navbar
+export default Navbar;

@@ -3,15 +3,14 @@ import "./Featured.scss";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 
-const Featured = ({type}) => {
-  
+const Featured = ({ type }) => {
   return (
     <div className="featured">
       {type && (
         <div className="category">
           <span>{type === "movie" ? "Movies" : "series"}</span>
           <select name="genre" id="genre">
-            <option >Genre</option>
+            <option>Genre</option>
             <option value="adventure"> Adventure</option>
             <option value="comedy"> comedy</option>
             <option value="crime"> Crime</option>
