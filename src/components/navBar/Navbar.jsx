@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="container">
         <div className="left">
           <img
-            src="https://www.edigitalagency.com.au/wp-content/uploads/Netflix-logo-red-black-png.png"
+            src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
             alt=""
           />
 
