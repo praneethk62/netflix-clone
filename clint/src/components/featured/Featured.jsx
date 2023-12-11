@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Featured.scss";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import axios from "axios";
 
 const Featured = ({ type }) => {
+  const [contant, setContant] = useState({});
+
+  useEffect(() => {
+    const getRandomContent = async () => {
+      try {
+        const res = await axios.get(`/movies/random?type=${type}`, {
+          headers: {
+            token:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjA3MDQ1OWRiZTkxZDExODUyM2Q4ZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwMjI4MTUzNCwiZXhwIjoxNzAyNzEzNTM0fQ.3b72OzAdFpAVOodNJER_NJA5GfL5exoOf68xhxHk86I",
+          },
+        });
+        setContant(res.data[0])
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getRandomContent()
+  },[type])
   return (
     <div className="featured">
       {type && (
         <div className="category">
-          <span>{type === "movie" ? "Movies" : "series"}</span>
+          <span>{type === "movies" ? "Movies" : "series"}</span>
           <select name="genre" id="genre">
             <option>Genre</option>
             <option value="adventure"> Adventure</option>
@@ -28,21 +47,16 @@ const Featured = ({ type }) => {
         </div>
       )}
       <img
-        src="https://png.pngtree.com/background/20210709/original/pngtree-atmosphere-gold-powder-background-black-gold-golden-particle-picture-image_937478.jpg"
+        src={contant.img}
         alt=""
       />
       <div className="info">
         <img
-          src="https://cdn.marvel.com/content/1x/moonknight_lob_log_def_03.png"
+          src={contant.imgTitle}
           alt=""
         />
         <span className="desc">
-          Pushpa a labor works for small sum but dreams of living a life of
-          king. But he is always let down by his step brothers for being an
-          illegitimate child of their father. He gets chance to work in dense
-          forest of red sanders where red sanders are smuggled to other
-          countries. The labors are always under the scanner of DSP Govindappa
-          but Pushpa dares to go against everyone creating
+       {contant.desc}
         </span>
         <div className="buttons">
           <button className="play">

@@ -5,7 +5,7 @@ const verify = require("../verifyToken");
 //create
 router.post("/", verify, async (req, res) => {
   if (req.user.isAdmin) {
-    const newMovie = new Movie(res.body);
+    const newMovie = new Movie(req.body); 
     try {
       const savedMovie = await newMovie.save();
       res.status(201).json(savedMovie);
@@ -54,7 +54,7 @@ router.delete("/:id", verify, async (req, res) => {
 });
 
 //get
-router.get("/:id", verify, async (req, res) => {
+router.get("/find/:id", verify, async (req, res) => {
   try {
     const movie = await Movie.findById(req.params.id);
 
@@ -83,6 +83,21 @@ router.get("/random", verify, async (req, res) => {
     res.status(200).json(movie);
   } catch (err) {
     res.status(500).json(err);
+  }
+});
+
+//get all
+router.get("/", verify, async (req, res) => {
+  if (req.user.isAdmin) {
+    try {
+      const movies = await Movie.find();
+
+      res.status(200).json(movies.reverse());
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  } else {
+    res.status(403).json("You are not allowed");
   }
 });
 
