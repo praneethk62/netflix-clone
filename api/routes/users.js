@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const User = require("../models/user"); 
+const User = require("../models/user");
 const CryptoJS = require("crypto-js");
 const verify = require("../verifyToken");
 
@@ -29,13 +29,11 @@ router.put("/:id", verify, async (req, res) => {
   }
 });
 
-
-
 //delete
 router.delete("/:id", verify, async (req, res) => {
   if (req.user.id === req.params.id || req.user.isAdmin) {
     try {
-    await User.findByIdAndDelete(req.params.id);
+      await User.findByIdAndDelete(req.params.id);
       res.status(200).json("User has been deleted ..");
     } catch (err) {
       res.status(500).json(err);
@@ -45,26 +43,26 @@ router.delete("/:id", verify, async (req, res) => {
   }
 });
 
-
 //get
 router.get("/find/:id", async (req, res) => {
-    try {
-        const user = await User.findById(req.params.id);
-            const { password, ...info } = user._doc;
+  try {
+    const user = await User.findById(req.params.id);
+    const { password, ...info } = user._doc;
 
-      res.status(200).json(info);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  
+    res.status(200).json(info);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //get all
 router.get("/", verify, async (req, res) => {
-    const query = req.query.new;
-  if ( req.user.isAdmin) {
+  const query = req.query.new;
+  if (req.user.isAdmin) {
     try {
-    const users= query ? await user.find().sort({_id:-1}).limit(10) :await user.find()
+      const users = query
+        ? await user.find().sort({ _id: -1 }).limit(10)
+        : await user.find();
       res.status(200).json(users);
     } catch (err) {
       res.status(500).json(err);
@@ -74,11 +72,10 @@ router.get("/", verify, async (req, res) => {
   }
 });
 
-
 //get user stats
 router.get("/starts", async (req, res) => {
-  const today =new Date()
-  const latYear = today.setFullYear(today.setFullYear() - 1)
+  const today = new Date();
+  const latYear = today.setFullYear(today.setFullYear() - 1);
 
   const monthsArray = [
     "January",
@@ -93,25 +90,26 @@ router.get("/starts", async (req, res) => {
     "October",
     "November",
     "December",
-  ]
+  ];
 
   try {
     const data = await User.aggregate([
       {
         $project: {
-          month:{$month: "$createdAT"}
-        }
-      }, {
+          month: { $month: "$createdAT" },
+        },
+      },
+      {
         $group: {
           _id: "$month",
-          total:{$sum:1}
-        }
-      }
-    ])
-    res.status(200).json(data)
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    res.status(200).json(data);
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
-})
+});
 
 module.exports = router;

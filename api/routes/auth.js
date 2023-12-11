@@ -1,8 +1,7 @@
-const router = require("express").Router()
-const User = require('../models/user')
+const router = require("express").Router();
+const User = require("../models/user");
 const CryptoJS = require("crypto-js");
-const jwt = require("jsonwebtoken")
-
+const jwt = require("jsonwebtoken");
 
 //register
 
@@ -16,7 +15,7 @@ router.post("/register", async (req, res) => {
     ).toString(),
   });
   try {
-    const user = await newUser.save()
+    const user = await newUser.save();
     res.status(201).json(user);
   } catch (err) {
     res.status(500).json(err);
@@ -27,26 +26,26 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const user =await User.findOne({ email: req.body.email })
-    !user && res.status(401).json("Worng password or Username !")
+    const user = await User.findOne({ email: req.body.email });
+    !user && res.status(401).json("Worng password or Username !");
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const originalPassword = bytes.toString(CryptoJS.enc.Utf8);
-    
+
     originalPassword !== req.body.password &&
       res.status(401).json("Worng password or Username !");
-    
+
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
-      process.env.SECRET_KEY,{expiresIn :"5d"}
+      process.env.SECRET_KEY,
+      { expiresIn: "5d" }
     );
-    
-    const { password, ...info } = user._doc
-    res.status(200).json({ ...info, accessToken })
 
+    const { password, ...info } = user._doc;
+    res.status(200).json({ ...info, accessToken });
   } catch (err) {
-    res.status(500).json(err)
+    res.status(500).json(err);
   }
-})
+});
 
-module.exports=router
+module.exports = router;
