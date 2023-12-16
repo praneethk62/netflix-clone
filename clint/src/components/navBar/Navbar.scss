@@ -1,3 +1,5 @@
+@import "../../App.scss";
+
 .navbar {
   width: 99%;
   color: white;
@@ -25,10 +27,21 @@
         height: 55px;
         width: 170px;
         margin-right: 40px;
+         @include mobile{
+          display: none;
+        }
       }
       span {
         margin-right: 30px;
         cursor: pointer;
+        @include tablet{
+          display: none;
+        }
+        &.navbarmainlinks{
+          @include tablet{
+          display: block;
+        } 
+        }
       }
     }
     .right {
@@ -44,6 +57,9 @@
         border-radius: 5px;
         object-fit: cover;
         cursor: pointer;
+         @include mobile{
+          display: none;
+        }
       }
       .profile {
         .options {
@@ -54,12 +70,18 @@
         span {
           padding: 10px;
           cursor: pointer;
+           @include mobile{
+          display: none;
+        }
         }
         &:hover {
           .options {
             display: flex;
             flex-direction: column;
             position: absolute;
+             @include mobile{
+          display: block;
+        }
           }
         }
       }

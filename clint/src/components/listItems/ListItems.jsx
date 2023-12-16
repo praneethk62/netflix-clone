@@ -6,6 +6,7 @@ import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 import ThumbDownOutlinedIcon from "@mui/icons-material/ThumbDownOutlined";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import vikings from "../../assets/vikings.mp4"
 
 
 const ListItems = ({ index,item }) => {
@@ -40,7 +41,7 @@ const ListItems = ({ index,item }) => {
         <img src={movie.img} alt="" />
         {isHovered && (
           <>
-            <video src={movie.trailer} autoPlay={true} loop />
+            <video src={vikings} autoPlay={true} loop />
             <div className="itemInfo">
               <div className="icons">
                 <PlayArrowIcon className="icon" />

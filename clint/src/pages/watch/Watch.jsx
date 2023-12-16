@@ -1,20 +1,12 @@
 import React from "react";
 import "./watch.scss";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
+import vikings from "../../assets/vikings.mp4"
 
 const Watch = () => {
-  const location = useLocation();
-  const movie = location.movie;
+  
 
-  // Check if movie is undefined before accessing its properties
-  if (!movie) {
-    return (
-      <div className="watch">
-        <p>Error: Movie not found.</p>
-      </div>
-    );
-  }
 
   return (
   <Link to="/">
@@ -23,7 +15,7 @@ const Watch = () => {
         <ArrowBackIcon />
         Home
       </div>
-      <video className="video" autoPlay controls src={movie.video} />
+      <video className="video" autoPlay controls src={vikings} />
       </div>
       </Link>
   );

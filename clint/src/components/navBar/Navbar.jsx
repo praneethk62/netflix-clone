@@ -24,10 +24,10 @@ const Navbar = () => {
             <span>Home</span>
           </Link>
           <Link to="/series" className="link">
-            <span>Series</span>
+            <span className="navbarmainlinks">Series</span>
           </Link>
           <Link to="/movies" className="link">
-            <span>Movies</span>
+            <span className="navbarmainlinks">Movies</span>
           </Link>
           <span>New and Popular</span>
           <span>My List</span>
@@ -43,6 +43,13 @@ const Navbar = () => {
           <div className="profile">
             <ArrowDropDownIcon className="icons" />
             <div className="options">
+              <Link to="/register" className="link">
+                <span>Register</span>{" "}
+              </Link>
+              <Link to="/login" className="link">
+                <span>Login</span>{" "}
+              </Link>
+
               <span>Settings</span>
               <span>Logout</span>
             </div>

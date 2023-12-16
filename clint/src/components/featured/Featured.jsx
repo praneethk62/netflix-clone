@@ -4,9 +4,9 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import axios from "axios";
 
-const Featured = ({ type }) => {
+const Featured = ({ type,setGenre }) => {
   const [contant, setContant] = useState({});
-
+  
   useEffect(() => {
     const getRandomContent = async () => {
       try {
@@ -22,15 +22,16 @@ const Featured = ({ type }) => {
       }
     }
     getRandomContent()
-  },[type])
+  }, [type])
+ 
   return (
     <div className="featured">
       {type && (
         <div className="category">
           <span>{type === "movies" ? "Movies" : "series"}</span>
-          <select name="genre" id="genre">
+          <select name="genre" id="genre" onChange={e=>setGenre(e.target.value)}>
             <option>Genre</option>
-            <option value="adventure"> Adventure</option>
+            <option value="action"> Action</option>
             <option value="comedy"> comedy</option>
             <option value="crime"> Crime</option>
             <option value="fantasy"> Fantasy</option>

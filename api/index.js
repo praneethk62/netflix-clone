@@ -28,6 +28,6 @@ mongoose.connect(process.env.MONGO_URL)
     app.use("/api/lists", listRoute);
 
 
-app.listen(8000, () => {
-    console.log("server started on port number 8000")
+app.listen(8800, () => {
+    console.log("server started on port number 8800")
 })

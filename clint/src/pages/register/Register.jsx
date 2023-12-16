@@ -1,21 +1,26 @@
 import React, { useRef } from 'react'
 import './register.scss'
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 
 const Register = () => {
 
   const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  
+  const navigate = useNavigate();
+
   const emailRef = useRef()
   const passwordRef = useRef()
+  const usernameRef = useRef()
 
   const handleStart = () => {
     setEmail(emailRef.current.value)
   }
-  const handleFinish = () => {
-    setPassword(passwordRef.current.value)
-  }
+ 
+   const navigateToHome = () => {
+     
+     navigate("/");
+   };
 
   return (
     <div className="register">
@@ -42,10 +47,15 @@ const Register = () => {
               Get Started
             </button>
           </div>
-        ):(<form className="input">
-          <input type="password" placeholder="password" ref={passwordRef } />
-          <button className="registerButton" onClick={handleFinish}> Start</button>
-        </form>)}
+        ) : (
+          <form className="input">
+            <input type="text" placeholder="username" ref={usernameRef} />
+            <input type="password" placeholder="password" ref={passwordRef} />
+            <button className="registerButton" onClick={navigateToHome}>
+              Start
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
