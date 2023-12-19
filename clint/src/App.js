@@ -4,7 +4,6 @@ import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
 import Watch from "./pages/watch/Watch";
 import {  Route, Routes,   } from "react-router-dom";
-import NewMovie from "./pages/newmovie/NewMovie";
 function App() {
 
   return (
@@ -18,7 +17,6 @@ function App() {
             <Route path="/movies" element={<Home type="movie" />} />
             <Route path="/series" element={<Home type="series" />} />
             <Route path="/watch" element={<Watch />} />
-            <Route path="/newmovie" element={<NewMovie />} />
           </>
         }
        
