@@ -3,6 +3,7 @@ import "./Featured.scss";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Featured = ({ type,setGenre }) => {
   const [contant, setContant] = useState({});
@@ -13,7 +14,7 @@ const Featured = ({ type,setGenre }) => {
         const res = await axios.get(`/movies/random?type=${type}`, {
           headers: {
             token:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjA3MDQ1OWRiZTkxZDExODUyM2Q4ZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwMjI4MTUzNCwiZXhwIjoxNzAyNzEzNTM0fQ.3b72OzAdFpAVOodNJER_NJA5GfL5exoOf68xhxHk86I",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NjA3MDQ1OWRiZTkxZDExODUyM2Q4ZiIsImlzQWRtaW4iOnRydWUsImlhdCI6MTcwMjcxNTY2MiwiZXhwIjoxNzAzMTQ3NjYyfQ.89EE96EyxLV3F6IvDizolhmBjHD0_VYrmburoKpyMD8",
           },
         });
         setContant(res.data[0])
@@ -28,10 +29,14 @@ const Featured = ({ type,setGenre }) => {
     <div className="featured">
       {type && (
         <div className="category">
-          <span>{type === "movies" ? "Movies" : "series"}</span>
-          <select name="genre" id="genre" onChange={e=>setGenre(e.target.value)}>
+          <span>{type === "movies" ? "Movies" : "Genres"}</span>
+          <select
+            name="genre"
+            id="genre"
+            onChange={(e) => setGenre(e.target.value)}
+          >
             <option>Genre</option>
-            <option value="action"> Action</option>
+            <option value="action"> Adventure/Action</option>
             <option value="comedy"> comedy</option>
             <option value="crime"> Crime</option>
             <option value="fantasy"> Fantasy</option>
@@ -47,26 +52,22 @@ const Featured = ({ type,setGenre }) => {
           </select>
         </div>
       )}
-      <img
-        src={contant.img}
-        alt=""
-      />
+      <img src={contant.img} alt="" />
       <div className="info">
-        <img
-          src={contant.imgTitle}
-          alt=""
-        />
-        <span className="desc">
-       {contant.desc}
-        </span>
+        <img src={contant.imgTitle} alt="" />
+        <span className="desc">{contant.desc}</span>
         <div className="buttons">
           <button className="play">
-            <PlayArrowIcon />
-            <span>play</span>
+            <Link to="/watch" className="link-no-underline">
+              <PlayArrowIcon />
+              <span>play</span>
+            </Link>
           </button>
           <button className="more">
-            <InfoOutlinedIcon />
-            <span>info</span>
+            <Link to="/watch" className="link-no-underline">
+              <InfoOutlinedIcon />
+              <span>info</span>
+            </Link>
           </button>
         </div>
       </div>

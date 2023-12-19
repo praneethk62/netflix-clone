@@ -1,5 +1,8 @@
 @import "../../App.scss";
-
+.link-no-underline {
+  text-decoration: none;
+  color: black;
+}
 .featured {
   height: 90vh;
   position: relative;
@@ -51,6 +54,7 @@
     }
     .buttons {
       display: flex;
+      
       button {
         padding: 10px 20px;
         border: none;
